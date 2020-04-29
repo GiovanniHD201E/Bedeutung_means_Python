@@ -1,3 +1,20 @@
 # Multifokus
-The initial objectiv is modelling a synaptic behavior of dopaminergic neurons to explain atention disorder.
-I propose to include Hyperactivity as disability to be considered in Diversity and Inclusion Plans.
+Hallo!
+Hello!
+How u?
+
+How are you?
+Wie geht es?
+
+Te interssas por simetria?
+Consegues ajustar o texto?
+Mantendo ideias iniciais!?
+
+Consegues vir já?
+Que horas chegas? 
+
+Tem muito trabalho!
+Tem bastante coisa!
+
+Simetrie
+Symetry
