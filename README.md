@@ -6,7 +6,7 @@ How u?
 How are you?
 Wie geht es?
 
-Te interssas por simetria?
+Te interessas por simetria?
 Consegues ajustar o texto?
 Mantendo ideias iniciais!?
 
