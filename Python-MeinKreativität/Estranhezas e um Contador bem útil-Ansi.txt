@@ -1,0 +1,473 @@
+U
+
+    ?g?                 	   @   s&  d Z ddddddddd	g	Zd
+dlZd
+dlmZmZ d
+d
+lm	Z
+ d
+dlZd
+dl
+Zd
+dlmZ d
+dlmZmZmZ d
+dlmZ zd
+dlmZ W n ek
+r?   Y nX ej eA zd
+dlm!Z! W n ek
+r?   Y nX ddAZ"G ddAdej#√Z$G ddAdej%√Z&G ddAdej'√Z(G ddAde)√Z*G ddAde+√Z,zd
+dlm,Z, W n ek
+?rV   Y nX zd
+dlm-Z- W n ek
+?r?   d d!AZ-Y nX d"ddd#?d$dAZ.d%d&AZ/zd
+d'lm/Z/ W n ek
+?r?   Y nX G d(dAde+√Z0G d)d	Ad	ej1√Z2G d*dAdej1√Z3G d+dAdej√Z4G d,dAdej5√Z6dS )-a?  This module implements specialized container datatypes providing
+alternatives to Python's general purpose built-in containers, dict,
+list, set, and tuple.
+
+* namedtuple   factory function for creating tuple subclasses with named fields
+* deque        list-like container with fast appends and pops on either end
+* ChainMap     dict-like class for creating a single view of multiple mappings
+* Counter      dict subclass for counting hashable objects
+* OrderedDict  dict subclass that remembers the order entries were added
+* defaultdict  dict subclass that calls a factory function to supply missing values
+* UserDict     wrapper around dictionary objects for easier dict subclassing
+* UserList     wrapper around list objects for easier list subclassing
+* UserString   wrapper around string objects for easier string subclassing
+
+?deque?defaultdict?namedtuple?UserDict?UserList?UserString?Counter?OrderedDict?ChainMap?  N)?itemgetter?eq)?iskeyword)?proxy)?repeat?chain?starmap)?recursive_repr)r   )r   c                 C   sR   | t jkr:tt | ¬}dd l}|jdtdd? |t¿| < |S tdt?d| ??¡Åd S )Nr
+   z?sing or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.9 it will stop working?  ??stacklevelzmodule z has no attribute )	?_collections_abc?__all__?getattr?warnings?warn?DeprecationWarning?globals?AttributeError?__name__)?name?objr   ?r!   ?:\Users\Giova\AppData\Local\Programs\Python\Python38\lib\collections\__init__.py?__getattr__*   s    
+
+ ?
+r#   c                   @   s   e Zd ZddAZdS )?_OrderedDictKeysViewc                 c   s   t | j¡E d H  d S ?N??reversed?_mapping??selfr!   r!   r"   ?__reversed__?   s    z!_OrderedDictKeysView.__reversed__N?r   ?__module__?__qualname__r+   r!   r!   r!   r"   r$   =   s   r$   c                   @   s   e Zd ZddAZdS )?_OrderedDictItemsViewc                 c   s$   t | j¡D ]}|| j| fV  q
+d S r%   r&   ?r*   ?keyr!   r!   r"   r+   D   s    z"_OrderedDictItemsView.__reversed__Nr,   r!   r!   r!   r"   r/   B   s   r/   c                   @   s   e Zd ZddAZdS )?_OrderedDictValuesViewc                 c   s    t | j¡D ]}| j| V  q
+d S r%   r&   r0   r!   r!   r"   r+   J   s    z#_OrderedDictValuesView.__reversed__Nr,   r!   r!   r!   r"   r2   H   s   r2   c                   @   s   e Zd ZdZdS )?_Link)?prev?nextr1   ?__weakref__N)r   r-   r.   ?__slots__r!   r!   r!   r"   r3   N   s   r3   c                   @   s? e Zd ZdZd+ddaZejeefddaZej	fddaZ	d	d
+AZ
+ddAZd
+dAZd,ddaZ
+d-ddaZddAZejj ZZddAZddAZddAZejjZe¿ZefddaZd.dd aZe¿d!d"A¡Zd#d$AZd%d&AZe d/d'd(a¡Z!d)d*AZ"dS )0r   z)Dictionary that remembers insertion orderr!   c                K   s\   z
+| j  W n> tk
+rH   t¿| _t| j¡ | _ }| |_|_i | _Y nX | j|f|? dS )z?nitialize an ordered dictionary.  The signature is the same as
+        regular dictionaries.  Keyword argument order is preserved.
+        N)	?_OrderedDict__rootr   r3   ?_OrderedDict__hardroot?_proxyr4   r5   ?_OrderedDict__map?_OrderedDict__update)r*   ?other?kwds?rootr!   r!   r"   ?__init__`   s    
+zOrderedDict.__init__c           	      C   sZ   || krJ|¿ | j |< }| j}|j}|||  |_|_|_||_||¡|_|| ||√ dS )z!od.__setitem__(i, y) <==> od[i]=yN)r;   r8   r4   r5   r1   )	r*   r1   ?valueZdict_setitemr   ZLink?linkr?   ?lastr!   r!   r"   ?__setitem__m   s    
+zOrderedDict.__setitem__c                 C   s>   || |¬ | j |A}|j}|j}||_||_d|_d|_dS )z od.__delitem__(y) <==> del od[y]N)r;   ?popr4   r5   )r*   r1   Zdict_delitemrB   ?link_prev?link_nextr!   r!   r"   ?__delitem__{   s    
+zOrderedDict.__delitem__c                 c   s(   | j }|j}||k	r$|jV  |j}qdS )zod.__iter__() <==> iter(od)N)r8   r5   r1   ?r*   r?   Zcurrr!   r!   r"   ?__iter__?  s
+    zOrderedDict.__iter__c                 c   s(   | j }|j}||k	r$|jV  |j}qdS )z#od.__reversed__() <==> reversed(od)N)r8   r4   r1   rI   r!   r!   r"   r+   ?  s
+    zOrderedDict.__reversed__c                 C   s*   | j }| |_|_| j@ t| A dS )z.od.clear() -> None.  Remove all items from od.N)r8   r4   r5   r;   ?clear?dict)r*   r?   r!   r!   r"   rK   ?  s    
+zOrderedDict.clearTc                 C   sj   | st d¡Å| j}|r0|j}|j}||_||_n|j}|j}||_||_|j}| j|= t| |B}||fS )z?emove and return a (key, value) pair from the dictionary.
+
+        Pairs are returned in LIFO order if last is true or FIFO order if false.
+        zdictionary is empty)?KeyErrorr8   r4   r5   r1   r;   rL   rE   )r*   rC   r?   rB   rF   rG   r1   rA   r!   r!   r"   ?popitem@  s     zOrderedDict.popitemc           	      C   st   | j | }|j}|j}|j}||_||_| j}|rR|j}||_||_||_||_n|j}||_||_||_||_dS )zcove an existing element to the end (or beginning if last is false).
+
+        Raise KeyError if the element does not exist.
+        N)r;   r4   r5   r8   )	r*   r1   rC   rB   rF   rG   Z	soft_linkr?   Zfirstr!   r!   r"   ?move_to_end?  s$    
+zOrderedDict.move_to_endc                 C   sV   t j}t| ¡d }|| j¡}||| j¡d 7 }||| j¡| 7 }||| j¡| 7 }|S )N?  r   )?_sys?getsizeof?len?__dict__r;   r9   r8   )r*   Zsizeof?n?sizer!   r!   r"   ?__sizeof__?  s    
+zOrderedDict.__sizeof__c                 C   s   t | ¡S )z:D.keys() -> a set-like object providing a view on D's keys)r$   r)   r!   r!   r"   ?keys?  s    zOrderedDict.keysc                 C   s   t | ¡S )z<D.items() -> a set-like object providing a view on D's items)r/   r)   r!   r!   r"   ?items  s    zOrderedDict.itemsc                 C   s   t | ¡S )z6D.values() -> an object providing a view on D's values)r2   r)   r!   r!   r"   ?values? s    zOrderedDict.valuesc                 C   s0   || kr| | }| |= |S || j kr,t|¡Å|S )z?d.pop(k[,d]) -> v, remove specified key and return the corresponding
+        value.  If key is not found, d is returned if given, otherwise KeyError
+        is raised.
+
+        )?_OrderedDict__markerrM   )r*   r1   ?default?resultr!   r!   r"   rE   ? s    
+zOrderedDict.popNc                 C   s   || kr| | S || |< |S )z?nsert key with a value of default if key is not in the dictionary.
+
+        Return the value for key if key is in the dictionary, else default.
+        r!   ?r*   r1   r\   r!   r!   r"   ?setdefault? s    zOrderedDict.setdefaultc                 C   s*   | sd| j jf S d| j jt| @¡f S )zod.__repr__() <==> repr(od)?s()z%s(%r))?__class__r   ?listrY   r)   r!   r!   r"   ?__repr__  s    zOrderedDict.__repr__c                 C   sD   t | ¡@}t t¿¡D ]}||dB q| jd|p4ddt| @¡fS )z%Return state information for picklingNr!   )?vars?copyr   rE   ra   ?iterrY   )r*   Z	inst_dict?kr!   r!   r"   ?__reduce__  s    zOrderedDict.__reduce__c                 C   s
+   |  | AS )z!od.copy() -> a shallow copy of od?ra   r)   r!   r!   r"   re     s    zOrderedDict.copyc                 C   s   | ¿}|D ]}|||< q
+|S )zYCreate a new ordered dictionary with keys from iterable and values set to value.
+        r!   )?cls?iterablerA   r*   r1   r!   r!   r"   ?fromkeys  s    
+zOrderedDict.fromkeysc                 C   s2   t |t¬r&t| |Bo$ttt| |√¡S t| |BS )z?d.__eq__(y) <==> od==y.  Comparison to another OD is order-sensitive
+        while comparison to a regular mapping is order-insensitive.
+
+        )?isinstancer   rL   ?__eq__?all?map?_eq?r*   r=   r!   r!   r"   rn     s    
+zOrderedDict.__eq__)r!   )T)T)N)N)#r   r-   r.   ?__doc__r@   rL   rD   r:   r3   rH   rJ   r+   rK   rN   rO   rW   r   ?MutableMapping?updater<   rX   rY   rZ   ?__ne__?objectr[   rE   r_   ?_recursive_reprrc   rh   re   ?classmethodrl   rn   r!   r!   r!   r"   r   Q   s8   
+  ?
+		
+
+	
+
+
+)r   )?_tuplegetterc                 C   s   t t| ¡|d?S )N)?doc)?property?_itemgetter)?indexr{   r!   r!   r"   ?<lambda>7     r   F)?rename?defaults?modulec                   s?  t ?t¬r?ddB@?ttt?¬¡?tt| ¡A} |r?¿}t	?¡D ]B\}}|
+@rrt|¡sr|dAsr||kr$|???|< |
+|A qH| g? D ]D}t|¡tk	rdd¡Å|
+@sJd|??¡Åt|¡r?d|??¡Åq?¿}?D ]F}|dA?r
+|?s
+td|??¡Å||k?r"td|??¡Å|
+|A q?}|d	k	?r|t|¡}t|¡t?¡k?r^td
+¡Åttttt?¡t|¡¬¡¡¡}tttj?¬¡?t?¡?t?¡ddBd
+dl }	ddddA?D ¡A d ?tj?tttttf\?????d|	?d|	?d?}
+?d| ??d?}t|
+|¬ |d }d| ?d|	?d?|_|d	k	?r>||_t???fddC¡}
+d| ?d?|
+j_??fdd C}d!| ?d"?|_?fd#d$C}|?fd%d&C}!fd'd(C}||
+j||||fD ]}| ?d)|j??|_?q? ?d|	?d?d*?||||
+||||d+?}t	?¡D ](\}}td,|??A}t ||¬||< ?q t| tf|√}|d	k?rvzt!d
+Aj"#d-d.B}W n t$tfk
+?rt   Y nX |d	k	?r?|_%|S )/aC  Returns a new subclass of tuple with named fields.
+
+    >>> Point = namedtuple('Point', ['x', 'y'])
+    >>> Point.__doc__                   # docstring for the new class
+    'Point(x, y)'
+    >>> p = Point(11, y=22)             # instantiate with positional args or keywords
+    >>> p[0] + p[1]                     # indexable like a plain tuple
+    33
+    >>> x, y = p                        # unpack like a regular tuple
+    >>> x, y
+    (11, 22)
+    >>> p.x + p.y                       # fields also accessible by name
+    33
+    >>> d = p._asdict()                 # convert to a dictionary
+    >>> d['x']
+    11
+    >>> Point(**d)                      # convert from a dictionary
+    Point(x=11, y=22)
+    >>> p._replace(x=100)               # _replace() is like str.replace() but targets named fields
+    Point(x=100, y=22)
+
+    ???_z*Type names and field names must be stringsz6Type names and field names must be valid identifiers: z0Type names and field names cannot be a keyword: z-Field names cannot start with an underscore: z"Encountered duplicate field name: Nz(Got more default values than field names??rP   ??(? c                 s   s   | ]}|?d ?V  qdS )z=%rNr!   )?.0r   r!   r!   r"   ?<genexpr>A  s     znamedtuple.<locals>.<genexpr>?zdef __new__(_cls, z): return _tuple_new(_cls, (z))Znamedtuple_)Z
+_tuple_newr   ?__new__zCreate new instance of c                    s2   ?| |¬}?|¡?kr.t d??dt|¡??¡Å|S )Nz	Expected z arguments, got )?TypeErrorrS   )rj   rk   r]   )?_len?num_fields?tuple_newr!   r"   ?_make?  s    
+znamedtuple.<locals>._makezMake a new z# object from a sequence or iterablec                   s.   |  ?|j?| √A}|r*tdt|¡??¡Å|S )NzGot unexpected field names: )r?  rE   ?ValueErrorrb   )r*   r>   r]   )?_map?field_namesr!   r"   ?_replace?  s    znamedtuple.<locals>._replacez
+Return a new z2 object replacing specified fields with new valuesc                    s   | j j?|   S )z/Return a nicely formatted representation string)ra   r   r)   )?repr_fmtr!   r"   rc   ¡  s    znamedtuple.<locals>.__repr__c                    s   ??| j | ¬¡S )z9Return a new dict which maps field names to their values.)?_fieldsr)   )?_dict?_zipr!   r"   ?_asdict?  s    znamedtuple.<locals>._asdictc                    s   ?| ¡S )z7Return self as a plain tuple.  Used by copy and pickle.r!   r)   )?_tupler!   r"   ?__getnewargs__?  s    z"namedtuple.<locals>.__getnewargs__?.r!   )rs   r7   r?  Z_field_defaultsZ_fields_defaultsrp  r?  r?  rc   r?  r?  zAlias for field number r   ?__main__)&rm   ?str?replace?splitrb   rp   rQ   ?intern?set?enumerate?isidentifier?_iskeyword?startswith?add?typer?  r?  ?tuplerS   rL   r'   ?zip?repr?joinrp  ?execrs   ?__defaults__ry   ?__func__r   r.   rz   ?_getframe?f_globals?getr   r-   )Ztypenamer?  r@  r?  r¿  ?seenr~   r   Zfield_defaultsZarg_list?s?namespacerp  r?  r?  rc   r?  r?  ?methodZclass_namespacer{   r]   r!   )	r?  r?  r?  r?  r?  r?  r?  r?  r?  r"   r   9  s?   
+???
+
+?
+
+  ??
+
+c                 C   s&   | j }|D ]}||d¬d | |< q
+dS )z!Tally elements from the iterable.r
+   rP   N)r?  )?mappingrk   Zmapping_get?elemr!   r!   r"   ?_count_elements?  s    r?  )r?  c                       s?  e Zd ZdZd/|fddcZddAZd0ddaZd	d
+AZed1dda¡Z	d2|fd
+dcZ
+d3ddaZddAZddAZ
+|fddCZddAZddAZddAZddAZdd AZd!d"AZd#d$AZd%d&AZd'd(AZd)d*AZd+d,AZd-d.AZ| ZS )4r   a?  Dict subclass for counting hashable items.  Sometimes called a bag
+    or multiset.  Elements are stored as dictionary keys and their counts
+    are stored as dictionary values.
+
+    >>> c = Counter('abcdeabcdabcaba')  # count elements from a string
+
+    >>> c.most_common(3)                # three most common elements
+    [('a', 5), ('b', 4), ('c', 3)]
+    >>> sorted(c)                       # list all unique elements
+    ['a', 'b', 'c', 'd', 'e']
+    >>> ''.join(sorted(c.elements()))   # list elements with repetitions
+    'aaaaabbbbcccdde'
+    >>> sum(c.values())                 # total of all counts
+    15
+
+    >>> c['a']                          # count of letter 'a'
+    5
+    >>> for elem in 'shazam':           # update counts from an iterable
+    ...     c[elem] += 1                # by adding 1 to each element's count
+    >>> c['a']                          # now there are seven 'a'
+    7
+    >>> del c['b']                      # remove all 'b'
+    >>> c['b']                          # now there are zero 'b'
+    0
+
+    >>> d = Counter('simsalabim')       # make another counter
+    >>> c.update(d)                     # add in the second counter
+    >>> c['a']                          # now there are nine 'a'
+    9
+
+    >>> c.clear()                       # empty the counter
+    >>> c
+    Counter()
+
+    Note:  If a count is set to zero or reduced to zero, it will remain
+    in the counter until the entry is deleted or the counter is cleared:
+
+    >>> c = Counter('aaabbc')
+    >>> c['b'] -= 2                     # reduce the count of 'b' by two
+    >>> c.most_common()                 # 'b' is still in, but its count is zero
+    [('a', 3), ('c', 1), ('b', 0)]
+
+    Nc                   s    t t| ¬@ | j|f|? dS )a	  Create a new, empty Counter object.  And if given, count elements
+        from an input iterable.  Or, initialize the count from another mapping
+        of elements to their counts.
+
+        >>> c = Counter()                           # a new, empty counter
+        >>> c = Counter('gallahad')                 # a new counter from an iterable
+        >>> c = Counter({'a': 4, 'b': 2})           # a new counter from a mapping
+        >>> c = Counter(a=4, b=2)                   # a new counter from keyword args
+
+        N)?superr   r@   ru   )r*   rk   r>   ri   r!   r"   r@     s    zCounter.__init__c                 C   s   dS )z1The count of elements not in the Counter is zero.r
+   r!   r0   r!   r!   r"   ?__missing__*  s    zCounter.__missing__c                 C   s6   |dkrt | @td¡dd?S tj|| @td¡d?S )z?st the n most common elements and their counts from the most
+        common to the least.  If n is None, then list all element counts.
+
+        >>> Counter('abracadabra').most_common(3)
+        [('a', 5), ('b', 2), ('r', 2)]
+
+        NrP   T)r1   ?reverse?r1   )?sortedrY   r}   ?_heapqZnlargest?r*   rU   r!   r!   r"   ?most_common/  s    	zCounter.most_commonc                 C   s   t tt| @¬AS )aB  Iterator over elements repeating each as many times as its count.
+
+        >>> c = Counter('ABCABC')
+        >>> sorted(c.elements())
+        ['A', 'A', 'B', 'B', 'C', 'C']
+
+        # Knuth's example for prime factors of 1836:  2**2 * 3**3 * 17**1
+        >>> prime_factors = Counter({2: 2, 3: 3, 17: 1})
+        >>> product = 1
+        >>> for factor in prime_factors.elements():     # loop over factors
+        ...     product *= factor                       # and multiply them
+        >>> product
+        1836
+
+        Note, if an element's count has been set to zero or is a negative
+        number, elements() will ignore it.
+
+        )?_chainZ
+from_iterable?_starmap?_repeatrY   r)   r!   r!   r"   ?elements<  s    zCounter.elementsc                 C   s   t d¡Åd S )Nz@Counter.fromkeys() is undefined.  Use Counter(iterable) instead.)?NotImplementedError)rj   rk   ?vr!   r!   r"   rl   T  s    	?Counter.fromkeysc                   sr   |dk	r`t |tj¬rV| rD| j}|@D ]\}}|||d¬ | |< q&q`tt| ¬|A n
+t| |¬ |rn| |A dS )a?  Like dict.update() but add counts instead of replacing them.
+
+        Source can be an iterable, a dictionary, or another Counter instance.
+
+        >>> c = Counter('which')
+        >>> c.update('witch')           # add elements from another iterable
+        >>> d = Counter('watch')
+        >>> c.update(d)                 # add elements from another counter
+        >>> c['h']                      # four 'h' in which, witch, and watch
+        4
+
+        Nr
+   )	rm   r   ?Mappingr?  rY   r?  r   ru   r?  ?r*   rk   r>   Zself_getr?  ?countri   r!   r"   ru   `  s    
+zCounter.updatec                K   sn   |dk	r\| j }t|tj¬r@|@D ]\}}||d¬| | |< q"n|D ]}||d¬d | |< qD|rj| |A dS )a?  Like dict.update() but subtracts counts instead of replacing them.
+        Counts can be reduced below zero.  Both the inputs and outputs are
+        allowed to contain zero and negative counts.
+
+        Source can be an iterable, a dictionary, or another Counter instance.
+
+        >>> c = Counter('which')
+        >>> c.subtract('witch')             # subtract elements from another iterable
+        >>> c.subtract(Counter('watch'))    # subtract elements from another counter
+        >>> c['h']                          # 2 in which, minus 1 in witch, minus 1 in watch
+        0
+        >>> c['w']                          # 1 in which, minus 1 in witch, minus 1 in watch
+        -1
+
+        Nr
+   rP   )r?  rm   r   r`  rY   ?subtractr?  r!   r!   r"   rp  B  s    zCounter.subtractc                 C   s
+   |  | AS )zReturn a shallow copy.ri   r)   r!   r!   r"   re   ?  s    zCounter.copyc                 C   s   | j t| ¡ffS r%   )ra   rL   r)   r!   r!   r"   rh     s    zCounter.__reduce__c                    s   || krt ¿|A dS )zGLike dict.__delitem__() but does not raise KeyError for missing values.N)r?  rH   )r*   r?  ri   r!   r"   rH   ¬  s    zCounter.__delitem__c                 C   sf   | sd| j j S z(dtdj| @¬A}d| j j|f W S  tk
+r`   d| j jt| ¡B Y S X d S )Nr`   r?  z%r: %rz%s({%s})z
+{0}({1!r}))	ra   r   r?  rp   ?__mod__r?  r?  ?formatrL   )r*   rY   r!   r!   r"   rc   ?  s    zCounter.__repr__c                 C   sp   t |t¬stS t¿}| @D ]$\}}|||  }|dkr|||< q|@D ] \}}|| krJ|dkrJ|||< qJ|S )zAdd counts from two counters.
+
+        >>> Counter('abbb') + Counter('bcc')
+        Counter({'b': 4, 'c': 2, 'a': 1})
+
+        r
+   ?rm   r   ?NotImplementedrY   ?r*   r=   r]   r?  r?  ?newcountr!   r!   r"   ?__add__?  s    
+
+
+zCounter.__add__c                 C   st   t |t¬stS t¿}| @D ]$\}}|||  }|dkr|||< q|@D ]$\}}|| krJ|dk rJd| ||< qJ|S )z?Subtract count, but keep only results with positive counts.
+
+        >>> Counter('abbbc') - Counter('bccd')
+        Counter({'b': 2, 'a': 1})
+
+        r
+   r?  r?  r!   r!   r"   ?__sub__?  s    
+
+zCounter.__sub__c                 C   s|   t |t¬stS t¿}| @D ]0\}}|| }||k r8|n|}|dkr|||< q|@D ] \}}|| krV|dkrV|||< qV|S )znion is the maximum of value in either of the input counters.
+
+        >>> Counter('abbb') | Counter('bcc')
+        Counter({'b': 3, 'c': 2, 'a': 1})
+
+        r
+   r?  ?r*   r=   r]   r?  r?  ?other_countr?  r!   r!   r"   ?__or__? s    
+
+
+zCounter.__or__c                 C   sR   t |t¬stS t¿}| @D ]0\}}|| }||k r8|n|}|dkr|||< q|S )z?Intersection is the minimum of corresponding counts.
+
+        >>> Counter('abbb') & Counter('bcc')
+        Counter({'b': 1})
+
+        r
+   r?  r?  r!   r!   r"   ?__and__? s    
+
+zCounter.__and__c                 C   s,   t ¿}| @D ]\}}|dkr|||< q|S )zEAdds an empty counter, effectively stripping negative and zero countsr
+   ?r   rY   ?r*   r]   r?  r?  r!   r!   r"   ?__pos__  s
+    
+zCounter.__pos__c                 C   s0   t ¿}| @D ]\}}|dk rd| ||< q|S )z{Subtracts from an empty counter.  Strips positive and zero counts,
+        and flips the sign on negative counts.
+
+        r
+   r?  r?  r!   r!   r"   ?__neg__  s
+    zCounter.__neg__c                 C   s&   ddA|  @D ¡}|D ]
+}| |= q| S )z?Internal method to strip elements with a negative or zero countc                 S   s   g | ]\}}|d ks|?qS )r
+   r!   )r`  r?  r?  r!   r!   r"   ?<listcomp>  s      z*Counter._keep_positive.<locals>.<listcomp>)rY   )r*   Znonpositiver?  r!   r!   r"   ?_keep_positive  s    zCounter._keep_positivec                 C   s*   | @D ]\}}| |  |7  < q| @S )z?nplace add from another counter, keeping only positive counts.
+
+        >>> c = Counter('abbb')
+        >>> c += Counter('bcc')
+        >>> c
+        Counter({'b': 4, 'c': 2, 'a': 1})
+
+        ?rY   r? ?r*   r=   r?  r?  r!   r!   r"   ?__iadd__   s    	zCounter.__iadd__c                 C   s*   | @D ]\}}| |  |8  < q| @S )z?nplace subtract counter, but keep only results with positive counts.
+
+        >>> c = Counter('abbbc')
+        >>> c -= Counter('bccd')
+        >>> c
+        Counter({'b': 2, 'a': 1})
+
+        r  r  r!   r!   r"   ?__isub__-  s    	zCounter.__isub__c                 C   s2   | @D ] \}}| | }||kr|| |< q| @S )z?nplace union is the maximum of value from either counter.
+
+        >>> c = Counter('abbb')
+        >>> c |= Counter('bcc')
+        >>> c
+        Counter({'b': 3, 'c': 2, 'a': 1})
+
+        r  )r*   r=   r?  r?  r?  r!   r!   r"   ?__ior__:  s
+    	
+zCounter.__ior__c                 C   s2   |  @D ] \}}|| }||k r|| |< q| @S )z?nplace intersection is the minimum of corresponding counts.
+
+        >>> c = Counter('abbb')
+        >>> c &= Counter('bcc')
+        >>> c
+        Counter({'b': 1})
+
+        r  )r*   r=   r?  r?  r?  r!   r!   r"   ?__iand__I  s
+    	
+zCounter.__iand__)N)N)N)N)N)r   r-   r.   rs   r@   r?  r?  r?  ry   rl   ru   rp  re   rh   rH   rc   r?  r?  r?  r?  r?  r?  r? r? r? r? r? ?__classcell__r!   r!   ri   r"   r   ? s0   2
+
+!
+
+
+c                   @   s?  e Zd ZdZddAZddAZddAZd'd	d
+aZddAZd
+dAZ	ddAZ
+ddAZe¿ddA¡Z
+eddA¡ZddAZeZd(ddaZeddA¡ZddAZdd AZd!d"AZd#d$AZd%d&AZdS ))r	   a?   A ChainMap groups multiple dicts (or other mappings) together
+    to create a single, updateable view.
+
+    The underlying mappings are stored in a list.  That list is public and can
+    be accessed or updated using the *maps* attribute.  There is no other
+    state.
+
+    Lookups search the underlying mappings successively until a key is found.
+    In contrast, writes, updates, and deletions only operate on the first
+    mapping.
+
+    c                 G   s   t |¡pi g| _dS )z?nitialize a ChainMap by setting *maps* to the given mappings.
+        If no mappings are provided, a single empty dictionary is used.
+
+        N)rb   ?maps)r*   r? r!   r!   r"   r@   k  s    zChainMap.__init__c                 C   s   t |¡Åd S r%   )rM   r0   r!   r!   r"   r?  r  s    zChainMap.__missing__c              	   C   s:   | j D ](}z|| W   S  tk
+r,   Y qX q| |AS r%   )r? rM   r?  )r*   r1   r?  r!   r!   r"   ?__getitem__u  s    
+zChainMap.__getitem__Nc                 C   s   || kr| | S |S r%   r!   r^   r!   r!   r"   r?  }  s    zChainMap.getc                 C   s   t t¿j| j?¡S r%   )rS   rb  ?unionr? r)   r!   r!   r"   ?__len__  s    zChainMap.__len__c                 C   s&   i }t | j¡D ]}||A qt|¡S r%   )r'   r? ru   rf   )r*   ?dr?  r!   r!   r"   rJ   √  s    zChainMap.__iter__c                    s   t |fddC| jD ¡¡S )Nc                 3   s   | ]}?|kV  qd S r%   r!   )r`  ?mr@  r!   r"   r?  ?  s     z(ChainMap.__contains__.<locals>.<genexpr>??anyr? r0   r!   r@  r"   ?__contains__?  s    zChainMap.__contains__c                 C   s
+   t | j¡S r%   r? r)   r!   r!   r"   ?__bool__~  s    zChainMap.__bool__c                 C   s"   | j j?ddtt| j¬A?d?S )Nr?  r?  r?  )ra   r   r?  rp   rp  r? r)   r!   r!   r"   rc   s  s    zChainMap.__repr__c                 G   s   | t j|f|??¡S )z?Create a ChainMap with a single dict created from the iterable.)rL   rl   )rj   rk   ?argsr!   r!   r"   rl   ?  s    zChainMap.fromkeysc                 C   s$   | j | jd @f| jddl ??S )zHNew ChainMap or subclass with a new copy of maps[0] and refs to maps[1:]r
+   rP   N)ra   r? re   r)   r!   r!   r"   re   ?  s    z
+ChainMap.copyc                 C   s   |dkri }| j |f| j??S )zyNew ChainMap with a new map followed by all previous maps.
+        If no map is provided, an empty dict is used.
+        N?ra   r? )r*   r? r!   r!   r"   ?new_child?  s    zChainMap.new_childc                 C   s   | j | jddl ?S )zNew ChainMap from maps[1:].rP   Nr? r)   r!   r!   r"   ?parents?  s    zChainMap.parentsc                 C   s   || j d |< d S ?Nr
+   )r? )r*   r1   rA   r!   r!   r"   rD   ?  s    zChainMap.__setitem__c                 C   s8   z| j d |= W n" tk
+r2   td|A¡ÅY nX d S )Nr
+   ?ey not found in the first mapping: {!r})r? rM   r?  r0   r!   r!   r"   rH   ?  s    zChainMap.__delitem__c                 C   s2   z| j d @W S  tk
+r,   td¡ÅY nX dS )zPRemove and return an item pair from maps[0]. Raise KeyError is maps[0] is empty.r
+   z#No keys found in the first mapping.N)r? rN   rM   r)   r!   r!   r"   rN   ?  s    zChainMap.popitemc                 G   s@   z| j d j|f|??W S  tk
+r:   td|A¡ÅY nX dS )zWRemove *key* from maps[0] and return its value. Raise KeyError if *key* not in maps[0].r
+   r? N)r? rE   rM   r?  )r*   r1   r  r!   r!   r"   rE   ?  s    zChainMap.popc                 C   s   | j d @ dS )z'Clear maps[0], leaving maps[1:] intact.r
+   N)r? rK   r)   r!   r!   r"   rK   ?  s    zChainMap.clear)N)N)r   r-   r.   rs   r@   r?  r? r?  r? rJ   r? r  rx   rc   ry   rl   re   ?__copy__r? r|   r? rD   rH   rN   rE   rK   r!   r!   r!   r"   r	   ]  s.   
+
+
+
+
+
+c                   @   sp   e Zd ZddAZde_ddAZddAZdd	AZd
+dAZdd
+AZ	ddAZ
+ddAZddAZddAZ
+eddda¡ZdS )r   c                  O   s?  | st d¡Å| ^}} t| ¡dkr0t dt| ¡ ¡Å| r>| d }n0d|krj|dA}dd l}|jdtdd? nd }i |_|d k	r?|A |r?|A d S )	Nz<descriptor '__init__' of 'UserDict' object needs an argumentrP   z$expected at most 1 arguments, got %dr
+   rL   z0Passing 'dict' as keyword argument is deprecatedr   r   )r?  rS   rE   r   r   r   ?dataru   )r  ?kwargsr*   rL   r   r!   r!   r"   r@   ?  s(    
+
+ ?
+zUserDict.__init__z($self, dict=None, /, **kwargs)c                 C   s
+   t | j¡S r%   ?rS   r? r)   r!   r!   r"   r? ? r   zUserDict.__len__c                 C   s:   || j kr| j | S t| jd¬r.| j| |BS t|¡Åd S )Nr?  )r? ?hasattrra   r?  rM   r0   r!   r!   r"   r? ? s
+    
+
+zUserDict.__getitem__c                 C   s   || j |< d S r%   ?r? )r*   r1   ?itemr!   r!   r"   rD   ? r   zUserDict.__setitem__c                 C   s   | j |= d S r%   r? r0   r!   r!   r"   rH   ? r   zUserDict.__delitem__c                 C   s
+   t | j¡S r%   )rf   r? r)   r!   r!   r"   rJ   ? s    zUserDict.__iter__c                 C   s
+   || j kS r%   r? r0   r!   r!   r"   r? ? s    zUserDict.__contains__c                 C   s
+   t | j¡S r%   ?rp  r? r)   r!   r!   r"   rc   ? r   zUserDict.__repr__c                 C   s4   | j | j A}|j| jA | jd @|jd< |S ?Nr? )ra   rp  rT   ru   re   ?r*   Zinstr!   r!   r"   r? ? s    zUserDict.__copy__c                 C   sR   | j tkrt| j@¡S dd l}| j}zi | _|| A}W 5 || _X || A |S r? )ra   r   r? re   ru   )r*   re   r? ?cr!   r!   r"   re   ? s    
+
+z
+UserDict.copyNc                 C   s   | ¿}|D ]}|||< q
+|S r%   r!   )rj   rk   rA   r? r1   r!   r!   r"   rl     s    
+zUserDict.fromkeys)N)r   r-   r.   r@   ?__text_signature__r? r? rD   rH   rJ   r? rc   r? re   ry   rl   r!   r!   r!   r"   r   ?  s   
+c                   @   s  e Zd ZdZd@ddaZddAZddAZd	d
+AZddAZd
+dAZ	ddAZ
+ddAZddAZddAZ
+ddAZddAZddAZddAZdd AZd!d"AZd#d$AZeZd%d&AZd'd(AZd)d*AZd+d,AZdAd.d/aZd0d1AZd2d3AZd4d5AZd6d7AZd8d9AZd:d;AZ d<d=AZ!d>d?AZ"dS )Br   zAA more or less complete user-defined wrapper around list objects.Nc                 C   sb   g | _ |d k	r^t|¡t| j ¡kr0|| j d d l< n.t|t¬rT|j d d l | j d d l< n
+t|¡| _ d S r%   )r? r`  rm   r   rb   )r*   Zinitlistr!   r!   r"   r@     s    
+zUserList.__init__c                 C   s
+   t | j¡S r%   r   r)   r!   r!   r"   rc   $  r   zUserList.__repr__c                 C   s   | j | |Ak S r%   ?r? ?_UserList__castrr   r!   r!   r"   ?__lt__%  r   zUserList.__lt__c                 C   s   | j | |AkS r%   r  rr   r!   r!   r"   ?__le__&  r   zUserList.__le__c                 C   s   | j | |AkS r%   r  rr   r!   r!   r"   rn   '  r   zUserList.__eq__c                 C   s   | j | |AkS r%   r  rr   r!   r!   r"   ?__gt__(  r   zUserList.__gt__c                 C   s   | j | |AkS r%   r  rr   r!   r!   r"   ?__ge__)  r   zUserList.__ge__c                 C   s   t |t¬r|jS |S r%   )rm   r   r? rr   r!   r!   r"   Z__cast*  s    zUserList.__castc                 C   s
+   || j kS r%   r? ?r*   r? r!   r!   r"   r? ,  r   zUserList.__contains__c                 C   s
+   t | j¡S r%   r? r)   r!   r!   r"   r? -  r   zUserList.__len__c                 C   s(   t |t¬r| | j| AS | j| S d S r%   )rm   ?slicera   r? ?r*   ?ir!   r!   r"   r? .  s    
+zUserList.__getitem__c                 C   s   || j |< d S r%   r? ?r*   r  r? r!   r!   r"   rD   3  r   zUserList.__setitem__c                 C   s   | j |= d S r%   r? r
+  r!   r!   r"   rH   4  r   zUserList.__delitem__c                 C   sP   t |t¬r| | j|j AS t |t| j¡¬r<| | j| AS | | jt|¡ AS r%   ?rm   r   ra   r? r`  rb   rr   r!   r!   r"   r?  5  s
+    
+zUserList.__add__c                 C   sP   t |t¬r| |j| j AS t |t| j¡¬r<| || j AS | t|¡| j AS r%   r  rr   r!   r!   r"   ?__radd__;  s
+    
+zUserList.__radd__c                 C   sR   t |t¬r|  j|j7  _n2t |t| j¡¬r<|  j|7  _n|  jt|¡7  _| S r%   )rm   r   r? r`  rb   rr   r!   r!   r"   r? A  s    
+zUserList.__iadd__c                 C   s   |  | j| AS r%   ?ra   r? rA  r!   r!   r"   ?__mul__I  s    zUserList.__mul__c                 C   s   |  j |9  _ | S r%   r? rA  r!   r!   r"   ?__imul__L  s    zUserList.__imul__c                 C   s8   | j | j A}|j| jA | jd d d l |jd< |S r  )ra   rp  rT   ru   r  r!   r!   r"   r? O  s    zUserList.__copy__c                 C   s   | j |A d S r%   )r? ?appendr  r!   r!   r"   r  U  r   zUserList.appendc                 C   s   | j ||B d S r%   )r? ?insertr  r!   r!   r"   r  V  r   zUserList.insertr?  c                 C   s   | j |AS r%   )r? rE   r
+  r!   r!   r"   rE   W  r   zUserList.popc                 C   s   | j |A d S r%   )r? ?remover  r!   r!   r"   r  X  r   zUserList.removec                 C   s   | j @ d S r%   )r? rK   r)   r!   r!   r"   rK   Y  r   zUserList.clearc                 C   s
+   |  | AS r%   ri   r)   r!   r!   r"   re   Z  r   z
+UserList.copyc                 C   s   | j |AS r%   )r? r?  r  r!   r!   r"   r?  [  r   zUserList.countc                 G   s   | j j|f|??S r%   ?r? r~   )r*   r? r  r!   r!   r"   r~   \  r   zUserList.indexc                 C   s   | j @ d S r%   )r? r   r)   r!   r!   r"   r   ]  r   zUserList.reversec                O   s   | j j||? d S r%   )r? ?sort?r*   r  r>   r!   r!   r"   r  ^  r   z
+UserList.sortc                 C   s*   t |t¬r| j|jA n| j|A d S r%   )rm   r   r? ?extendrr   r!   r!   r"   r  _  s    
+zUserList.extend)N)r?  )#r   r-   r.   rs   r@   rc   r  r  rn   r	  r
+  r  r? r? r? rD   rH   r?  r  r? r  ?__rmul__r  r? r  r  rE   r  rK   re   r?  r~   r   r  r  r!   r!   r!   r"   r     s@   
+
+
+c                   @   sh  e Zd ZddAZddAZddAZddAZd	d
+AZddAZd
+dAZ	ddAZ
+ddAZddAZddAZ
+ddAZddAZddAZddAZdd AZd!d"AZd#d$AZd%d&AZeZd'd(AZd)d*AZd+d,AZd-d.AZd/d0AZd1ejfd2d3aZd?6d7aZd1ejfd8d9aZ d?;d<aZ!d1ejfd=d>aZ"d?d@AZ#dAdBAZ$d1ejfdCdDaZ%dEdFAZ&dGdHAZ'dIdJAZ(dKdLAZ)dMdNAZ*dOdPAZ+dQdRAZ,dSdTAZ-dUdVAZ.dWdXAZ/dYdZAZ0d[d\AZ1d]d^AZ2d_d`AZ3dadbAZ4d?ddeaZ5e6j7Z7dfdgAZ8d?idjaZ9d1ejfdkdlaZ:d1ejfdmdnaZ;dodpAZ<dqdrAZ=d?sdtaZ>d?udvaZ?d?wdxaZ@d?zd{aZAd1ejfd|d}aZBd?~daZCd$D ZDd§ƒ ZEdHn ZFd?? ZGd?? ZHdcS )?   c                 C   s<   t |t¬r|| _n&t |t¬r.|jd d l | _n
+t|¡| _d S r%   )rm   r?  r? r   ?r*   Zseqr!   r!   r"   r@   l  s
+    
+
+zUserString.__init__c                 C   s
+   t | j¡S r%   )r?  r? r)   r!   r!   r"   ?__str__s  r   zUserString.__str__c                 C   s
+   t | j¡S r%   r   r)   r!   r!   r"   rc   t  r   zUserString.__repr__c                 C   s
+   t | j¡S r%   )?intr? r)   r!   r!   r"   ?__int__u  r   zUserString.__int__c                 C   s
+   t | j¡S r%   )?floatr? r)   r!   r!   r"   ?__float__v  r   zUserString.__float__c                 C   s
+   t | j¡S r%   )?complexr? r)   r!   r!   r"   ?__complex__w  r   zUserString.__complex__c                 C   s
+   t | j¡S r%   )?hashr? r)   r!   r!   r"   ?__hash__x  r   zUserString.__hash__c                 C   s   | j d d l fS r%   r? r)   r!   r!   r"   r?  y  s    zUserString.__getnewargs__c                 C   s    t |t¬r| j|jkS | j|kS r%   ?rm   r   r? ?r*   ?stringr!   r!   r"   rn   |  s    
+zUserString.__eq__c                 C   s    t |t¬r| j|jk S | j|k S r%   r'  r(  r!   r!   r"   r    s    
+zUserString.__lt__c                 C   s    t |t¬r| j|jkS | j|kS r%   r'  r(  r!   r!   r"   r  A  s    
+zUserString.__le__c                 C   s    t |t¬r| j|jkS | j|kS r%   r'  r(  r!   r!   r"   r	  ?  s    
+zUserString.__gt__c                 C   s    t |t¬r| j|jkS | j|kS r%   r'  r(  r!   r!   r"   r
+  Ø  s    
+zUserString.__ge__c                 C   s   t |t¬r|j}|| jkS r%   r'  )r*   Zcharr!   r!   r"   r? ?  s    
+zUserString.__contains__c                 C   s
+   t | j¡S r%   r? r)   r!   r!   r"   r? ?  r   zUserString.__len__c                 C   s   |  | j| AS r%   r  )r*   r~   r!   r!   r"   r? ?  r   zUserString.__getitem__c                 C   sJ   t |t¬r| | j|j AS t |t¬r6| | j| AS | | jt|¡ AS r%   )rm   r   ra   r? r?  rr   r!   r!   r"   r?  ?  s
+    
+
+zUserString.__add__c                 C   s.   t |t¬r| || j AS | t|¡| j AS r%   )rm   r?  ra   r? rr   r!   r!   r"   r  ?  s    
+zUserString.__radd__c                 C   s   |  | j| AS r%   r  rA  r!   r!   r"   r  ?  s    zUserString.__mul__c                 C   s   |  | j| AS r%   r  ?r*   r  r!   r!   r"   r?  n  s    zUserString.__mod__c                 C   s   |  t|¡|  AS r%   )ra   r?  )r*   Ztemplater!   r!   r"   ?__rmod__?  s    zUserString.__rmod__c                 C   s   |  | j@AS r%   )ra   r? ?capitalizer)   r!   r!   r"   r,  ?  r   zUserString.capitalizec                 C   s   |  | j@AS r%   )ra   r? ?casefoldr)   r!   r!   r"   r-  ^  s    zUserString.casefoldc                 G   s   |  | jj|f|??AS r%   )ra   r? ?center?r*   ?widthr  r!   r!   r"   r.  ?  s    zUserString.centerr
+   c                 C   s    t |t¬r|j}| j|||CS r%   )rm   r   r? r?  ?r*   Zsub?start?endr!   r!   r"   r?  t  s    
+zUserString.count?tf-8?strictc                 C   s.   |d krdn|}|d krdn|}| j ||BS )Nr4  r5  )r? ?encode)r*   ?encoding?errorsr!   r!   r"   r6  ?  s    zUserString.encodec                 C   s   | j |||CS r%   )r? ?endswith)r*   ?suffixr2  r3  r!   r!   r"   r9  ?  s    zUserString.endswith?  c                 C   s   |  | j|AAS r%   )ra   r? ?expandtabs)r*   Ztabsizer!   r!   r"   r<  ?  s    zUserString.expandtabsc                 C   s    t |t¬r|j}| j|||CS r%   )rm   r   r? ?findr1  r!   r!   r"   r=  ?  s    
+zUserString.findc                O   s   | j j||?S r%   )r? r?  r  r!   r!   r"   r?  ?  s    zUserString.formatc                 C   s   | j |AS r%   )r? ?format_map)r*   r?  r!   r!   r"   r>  D  s    zUserString.format_mapc                 C   s   | j |||CS r%   r  r1  r!   r!   r"   r~   ƒ  s    zUserString.indexc                 C   s
+   | j @S r%   )r? ?isalphar)   r!   r!   r"   r?  n  r   zUserString.isalphac                 C   s
+   | j @S r%   )r? ?isalnumr)   r!   r!   r"   r@  ?  r   zUserString.isalnumc                 C   s
+   | j @S r%   )r? ?isasciir)   r!   r!   r"   rA  ?  r   zUserString.isasciic                 C   s
+   | j @S r%   )r? ?isdecimalr)   r!   r!   r"   rB  ?  r   zUserString.isdecimalc                 C   s
+   | j @S r%   )r? ?isdigitr)   r!   r!   r"   rC  ?  r   zUserString.isdigitc                 C   s
+   | j @S r%   )r? r?  r)   r!   r!   r"   r?  ?  r   zUserString.isidentifierc                 C   s
+   | j @S r%   )r? ?islowerr)   r!   r!   r"   rD  ^  r   zUserString.islowerc                 C   s
+   | j @S r%   )r? ?isnumericr)   r!   r!   r"   rE  Ø  r   zUserString.isnumericc                 C   s
+   | j @S r%   )r? ?isprintabler)   r!   r!   r"   rF  ?  r   zUserString.isprintablec                 C   s
+   | j @S r%   )r? ?isspacer)   r!   r!   r"   rG  ?  r   zUserString.isspacec                 C   s
+   | j @S r%   )r? ?istitler)   r!   r!   r"   rH  t  r   zUserString.istitlec                 C   s
+   | j @S r%   )r? ?isupperr)   r!   r!   r"   rI  ?  r   zUserString.isupperc                 C   s   | j |AS r%   )r? r?  r  r!   r!   r"   r?  ?  r   zUserString.joinc                 G   s   |  | jj|f|??AS r%   )ra   r? ?ljustr/  r!   r!   r"   rJ  ?  s    zUserString.ljustc                 C   s   |  | j@AS r%   )ra   r? ?lowerr)   r!   r!   r"   rK  ?  r   zUserString.lowerNc                 C   s   |  | j|AAS r%   )ra   r? ?lstrip?r*   ?charsr!   r!   r"   rL  ?  r   zUserString.lstripc                 C   s   | j |AS r%   )r? ?partition?r*   ?sepr!   r!   r"   rO  ?  s    zUserString.partitionr?  c                 C   s6   t |t¬r|j}t |t¬r |j}| | j|||CAS r%   )rm   r   r? ra   r¿  )r*   ?old?new?maxsplitr!   r!   r"   r¿  ?  s
+    
+
+zUserString.replacec                 C   s    t |t¬r|j}| j|||CS r%   )rm   r   r? ?rfindr1  r!   r!   r"   rU  ?  s    
+zUserString.rfindc                 C   s   | j |||CS r%   )r? ?rindexr1  r!   r!   r"   rV  ? s    zUserString.rindexc                 G   s   |  | jj|f|??AS r%   )ra   r? ?rjustr/  r!   r!   r"   rW  ? s    zUserString.rjustc                 C   s   | j |AS r%   )r? ?rpartitionrP  r!   r!   r"   rX  ? s    zUserString.rpartitionc                 C   s   |  | j|AAS r%   )ra   r? ?rstriprM  r!   r!   r"   rY  ? s    zUserString.rstripc                 C   s   | j ||BS r%   )r? rA  ?r*   rQ  rT  r!   r!   r"   rA  ? s    zUserString.splitc                 C   s   | j ||BS r%   )r? ?rsplitrZ  r!   r!   r"   r[  ? s    zUserString.rsplitFc                 C   s   | j |AS r%   )r? ?splitlines)r*   ?keependsr!   r!   r"   r\  ? r   zUserString.splitlinesc                 C   s   | j |||CS r%   )r? r?  )r*   ?prefixr2  r3  r!   r!   r"   r?  A s    zUserString.startswithc                 C   s   |  | j|AAS r%   )ra   r? ?striprM  r!   r!   r"   r_  ? r   zUserString.stripc                 C   s   |  | j@AS r%   )ra   r? ?swapcaser)   r!   r!   r"   r`  ? r   zUserString.swapcasec                 C   s   |  | j@AS r%   )ra   r? ?titler)   r!   r!   r"   ra  ? r   zUserString.titlec                 G   s   |  | jj|?AS r%   )ra   r? ?translater*  r!   r!   r"   rb  ? s    zUserString.translatec                 C   s   |  | j@AS r%   )ra   r? ?upperr)   r!   r!   r"   rc  ? r   zUserString.upperc                 C   s   |  | j|AAS r%   )ra   r? ?zfill)r*   r0  r!   r!   r"   rd  ? r   zUserString.zfill)r4  r5  )r;  )N)r?  )N)Nr?  )Nr?  )F)N)Ir   r-   r.   r@   r  rc   r   r"  r$  r&  r?  rn   r  r  r	  r
+  r? r? r? r?  r  r  r  r?  r+  r,  r-  r.  rQ   ?maxsizer?  r6  r9  r<  r=  r?  r>  r~   r?  r@  rA  rB  rC  r?  rD  rE  rF  rG  rH  rI  r?  rJ  rK  rL  r?  Z	maketransrO  r¿  rU  rV  rW  rX  rY  rA  r[  r\  r?  r_  r`  ra  rb  rc  rd  r!   r!   r!   r"   r   k  sb  
+
+
+
+
+
+
+
+
+)7rs   r   r   Zoperatorr   r}   r   rq   Zkeywordr
+   r?  ?sysrQ   Zheapqr¿  ?_weakrefr   r:   Z	itertoolsr   r?  r   rb  r   r|  Zreprlibr   rx   Z_collectionsr   ?ImportError?MutableSequence?registerr   r#   ?KeysViewr$   ?ItemsViewr/   ?ValuesViewr2   rw   r3   rL   r   rz   r   r?  r   rt   r	   r   r   ?Sequencer   r!   r!   r!   r"   ?<module>   sh   
+   ? Y &  vnMS

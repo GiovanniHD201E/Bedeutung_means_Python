@@ -1,18 +1,12 @@
 import random
 
-def aleatexto():
-    x = [
-    "Queimei a mao no fogo",
-    "Ich liebe dich, meine Tochter",
-    "Ich liebe dich, meine Vatti",
-    "Está doendo muito"
-    ]
-    for n in range(len(x)):
-        random.choice(x)
+def at():
+    x = ["Queimei a mao no fogo",
+         "Ich liebe dich, meine Tochter!", "Ich liebe dich, Vati!", "Está doendo muito"]
+    for n in range(10):
+        print(n, random.choice(x))
+        
     
-def aleatexto():
-    x = random.choice()
-    return x
 
 def stars(width=10):
     x = '*' * width
@@ -20,19 +14,18 @@ def stars(width=10):
 
 def f():
     print('*' * 10)
-    texto = aleatexto()
+    texto = at()
     return texto
 
 def Tipp(BA="A"):
     if BA in ("Ö", "Ç", "ç", "ö"):
         a = print(tip[3].split('.')[1])
+    if BA in ("S", ",s", ""," ","Sim", "vamos", "SIM"):
+        r = input("Escolha o número de estrelas ")
+        print(stars(r))
+        
 
-m = aleatexto()
-
-#texto = 'Queimei a mäo nao fogo'
-    
-"""padronizando a impressão de saída com a função print"""
-
+m = at()    
 
 tip = [
     'Para ver o que este programa faz, você precisa chamar uma das rotinas definidas no programa:',
@@ -42,12 +35,8 @@ tip = [
 
 print("Este é um aplicativo progressivo que crescerá com a sua participacao.")
 
-ba = input("Para comeöar digite a letra que está faltando nesta frase. \n ")
+ba = input("Vamos brincar com as frases acima? \n ")
 
-"""Rol de Diálogos a Arquivar
-
-"""
-Flex = (Tipp(ba))
 
 
 

@@ -1,0 +1,1 @@
+Digitei ARespondeu [Aber Also Auf]Teclei Leer-TasteRespondeu [ist und in]Teclei i Respondeu [ist in (in der)]>>> yes_votes = 42_572_654>>> no_votes = 43_132_495

@@ -1,18 +1,10 @@
 import random
 
 def aleatexto():
-    x = [
-    "Queimei a mao no fogo",
-    "Ich liebe dich, meine Tochter",
-    "Ich liebe dich, meine Vatti",
-    "Está doendo muito"
-    ]
-    for n in range(len(x)):
-        random.choice(x)
-    
-def aleatexto():
-    x = random.choice()
-    return x
+    x = ["Queimei a mao no fogo", "Ich liebe dich, meine Tochter!", "Ich liebe dich, Vati!", "Está doendo muito"]
+    for n in range(10):
+        print(n, random.choice(x))
+
 
 def stars(width=10):
     x = '*' * width

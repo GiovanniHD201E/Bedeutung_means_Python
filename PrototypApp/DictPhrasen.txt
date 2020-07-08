@@ -1,0 +1,96 @@
+de = "Nada aiNda"
+pt = "NoNe yet"
+en = "Nichts Noch"
+
+de = input('Digite a frase' + '  ')
+pt = input('Digite o significado em português \n\
+Ou tecle Enter para pular este campo ' + '  ')
+en = input('Digite o significado em inglês \n\
+Ou tecle enter' + ' ')
+
+def dicgio(de):
+    if de != "Nada aiNda":
+        Prov_de = []
+        Prov_de = Prov_de.append(de)
+    return Prov_de
+
+dicgio(de)
+
+MeinW = {
+    'Besonders bei': 'Besonders bei Verben',
+    'Besonders bei': 'Especialmente no caso de',
+    'WORTWUCHS':'Encontrei',
+Aufsätze
+Poetik
+Literaturepochen
+Grammatik
+Hilfreiches
+Glossare
+Flattersatz
+Als Flattersatz, anaxialer Satz oder asymmetrischer Satz, wird in der Typografie ein Text bezeichnet, dessen Zeilen entweder nach links, rechts oder links und rechts ungleichmäßig auslaufen, wobei die Wortzwischenräume stets gleichbleibend sind. Man unterscheidet linksbündigen und rechtsbündigen Flattersatz sowie den Mittelachsensatz (Textzeilen werden hier zur Mitte zentriert), wobei außerdem der freie Satz als flatternd bezeichnet werden muss, da die Ausrichtng der untereinander stehenden Zeilen händisch erfolgt und keine Orientierung an einer Achse gegeben ist. Der Flattersatz ist vor allem charakteristisch für Gedichte und darüber hinaus bei in�for�mellen Schreiben üblich.
+
+
+ 
+Begriff & Beispiel
+Der Begriff leitet sich vom Textbild ab, das beim Schreiben entsteht. Da die einzelnen Zeilen eines Textes nicht auf Zeilenbreite ausgetrieben werden, endet jede Zeile an einem anderen Punkt. Erreicht ein Wort hierbei den Spaltenrand, wird es in die nächste Zeile umgebrochen, wodurch eine treppenartige Struktur am rechten oder linken Zeilenrand entsteht, die auf den Leser durchaus unruhig erscheinen kann.Beispiel für den Flattersatz (linksbündig und rechtsbündig)
+
+Das obige Beispiel-Bild verdeutlicht das grundsätzliche Prinzip. Auf der linken Seite ist der Text linksbündig ausgerichtet. Das bedeutet, dass er sich auf der linken Seite an einer Achse orientiert, allerdings auf der rechten flattert. Auf der anderen Seite ist es es andersherum: der Text orientiert sich rechts an einer Achse, ist also bündig und flattert links. Die Treppenstruktur, die sich aufgrund des Flattersatzes ergibt, ist angedeutet.
+
+Dabei wird ersichtlich, dass die einzelnen Wörter, wenn sie das Ende der vorgegebenen Spalte erreicht haben, einfach umgebrochen werden. Dadurch ist der Abstand zwischen den einzelnen Wörtern grundsätzlich gleichmäßig, wobei es am Spaltenende zu Lücken kommen kann. Beispielsweise springt sadipscing im obigen Beispiel von der zweiten in die dritte Zeile. In der zweiten Spalte entsteht so eine Lücke am Zeilenende.
+
+Hinweis: In der deutschen Sprache, welche zahlreiche Komposita kennt, also Wörter, die aus mehreren Wörtern zusammengesetzt werden, ist eine Textgestaltung im Flattersatz eher unüblich, da es aufgrund der langen Wörter häufig zu Lücken im Text kommen würde. Folglich wird diese Variante eher im englischen Sprachraum genutzt und demnach auch als englischer Flattersatz bezeichnet. Im Deutschen kommt demnach zumeist der Rauhsatz oder der Blocksatz zum Einsatz. Der Rauhsatz, auch Rausatz, ist eine Variante des Flattersatzes.
+Rauhsatz & Blocksatz
+Der Rauhsatz ist eine Variante des Flattersatzes mit mit fester Flatterzone
+
+Der Rauhsatz, welcher eine Variante des Flattersatzes darstellt, trennt Wörter am Spaltenende. So ist der Rauhsatz zwar ebenfalls auf einer Seite bündig und flattert auf der anderen, doch durch die feste Flatterzone in welcher die Wörter aufgetrennt werden, können keinen so großen Lücken wie im obigen Beispiel entstehen. In diesem Beispiel ist die Worttrennung beliebig, im Deutschen gibt es hierfür allerdings feste Regeln.
+
+Eine weitere Möglichkeit, die einzelnen Zeilen eines Textes auf Spaltenbreite auszutreiben, stellt der Blocksatz dar. Dieser ist keine Form des Flattersatzes. Hierbei werden die einzelnen Zeilen, unabhängig von den Lücken, die so zwischen den Wörtern entstehen, auf die gleiche Breite getrimmt. Das kann vor allem bei einer geringen Spaltenbreite zu großen, unschönen Lücken führen und ist dadurch selten empfehlenswert.
+
+Durch den Blocksatz können zwischen den Wörtern Lücken entstehen
+
+Wie im obigen Beispiel ersichtlich wird, ist der Blocksatz auf beiden Seiten bündig und demzufolge nicht flatternd. Allerdings entstehen zwischen den einzelnen Wörtern der jeweiligen Zeilen unschöne Lücken, was vor allem an der geringen Spaltenbreite liegt. Ist die Spaltenbreite großzügig gewählt, sind die Lücken, die so entstehen, weniger auffällig. Bei sehr engen Spalten ist demzufolge der Flattersatz vorzuziehen oder eben dessen Sonderform: der Rauhsatz, der auf Worttrennungen basiert.
+
+Überblick: Varianten des Flattersatzes
+Im Beitrag wurden bereits die einzelnen Varianten des Flattersatzes dargestellt. Ausgelassen wurden allerdings der sogenannte Mittelachsensatz, wobei sich der Text an der Mitte der jeweiligen Kolumne orientiert und der freie Fall ausgelassen. Die nachfolgende Übersicht bündelt die einzelnen Varianten.
+
+Linksbündiger Flattersatz: Der Text ist linksbündig und flattert auf der rechten Seite. Folglich stehen die Anfangsbuchstaben einer Zeile – von Einrückungen abgesehen – auf der linken Seite untereinander.
+Rechtsbündiger Flattersatz: Der Text ist rechtsbündig und flattert auf der linken Seite. Folglich stehen die letzten Buchstaben einer Zeile stets untereinander. Diese Form widerspricht den Lesegewohnheiten.
+Freier Satz: Die Zeilen, die untereinander stehen, werden händisch, also manuell, an einer Achse ausgerichtet. Der Text flattert somit, auch wenn dies mitunter nicht wahrnehmbar ist.
+Mittelachsensatz: Der Text flattert links und rechts, aber nicht frei, da er sich mittig ausrichtet und demnach zentriert ist. Mitunter werden Gedichte in dieser Form dargestellt.
+Rauhsatz: Vor allem im Deutschen eine Alternative zum linksbündigen Flattersatz. Ein solcher Text ist auf einer Seite bündig – in der Regel links – und flattert auf der anderen. Allerdings werden große Lücken am Zeilenende durch einen Umbruch in der Flatterzone vermieden (Worttrennung)
+Lyrischer Flattersatz: Der Umbruch wird durch den Dichter sprachlich vorgegeben.
+Dramaturgischer Flattersatz: Der Zeilenumbruch ist dramaturgisch vorgesehen. Beispielsweise in Dialogen. Mitunter wird so auf der Textebene das Gesagte zusätzlich unterstrichen.
+Anwendung des Flattersatzes
+Der Flattersatz ist zumeist die Grundeinstellung eines jeden Textprogrammes, kommt demnach überall dort vor, wo durch den Anwender eine Texteingabe verlangt wird, wie etwa in E-Mails, Textdokumenten und anderen Eingabefeldern. Er ist darüber hinaus charakteristisch für Briefe sowie informelle Schreiben und außerdem für das Gedicht oder die Darstellung von Dialogen in sämtlichen Gattungen.
+
+Im Englischen findet sich der Flattersatz darüber hinaus durchaus in Büchern. Im Deutschen ist dies – da sich unsere Sprache durch zahlreiche Komposita, also zusammengesetzte Wörter, auszeichnet – in der Regel nicht der Fall. Hierbei kommt zumeist der Rauhsatz zum Einsatz, bei dem durch Worttrennungen eine gewisse Bündigkeit suggeriert und teils durch zusätzliche Textfugen nahezu erreicht wird.
+
+Ein idealer Flattersatz lässt allerdings auch keine Unruhe im Text zu. Das Textbild wird harmonisch gestaltet, sodass sich die Längen und Kürzen der einzelnen Zeilen abwechseln oder wie ein Wasserfall angeordnet sind. Auch hier kann durch eine Veränderung der Textgröße sowie der Zeilenabstände korrigiert werden.
+
+Kurzübersicht: Das Wichtigste im Überblick
+Als Flattersatz, anaxialer Satz oder asymmetrischer Satz, wird in der Typografie ein Text bezeichnet, dessen Zeilen entweder nach links, rechts oder links und rechts ungleichmäßig auslaufen, wobei die Wortzwischenräume stets gleichbleibend sind.
+Eine Sonderform des Flattersatzes stellt der Rauhsatz, auch Rausatz, dar. Hierbei werden Wörter in der sogenannten Flatterzone getrennt, wodurch die flatternde Seite nahezu bündig erscheint. Diese Form findet sich beispielsweise in den meisten Druckerzeugnissen.
+Hinweis: Der Flattersatz kommt darüber hinaus zumeist im Internet zum Einsatz. Aufgrund der verschiedenen Endgeräte kann nämlich nicht gewährleistet werden, dass das Umbrechen der Wörter am Zeilenende auf allen Geräten optimal erfolgt, weshalb die Darstellung im Blocksatz nicht in jedem Fall zu empfehlen ist, da auf kleinen Displays große Lücken entstehen können.
+Stichwortverzeichnis →RauhsatzMittelachsensatzFließtext
+
+
+
+Inhaltsverzeichnis
+1 Begriff & Beispiel
+2 Rauhsatz & Blocksatz
+3 Überblick: Varianten des Flattersatzes
+4 Anwendung des Flattersatzes
+Stichwortverzeichnis
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Zum Projekt
+Über uns
+Impressum
+Datenschutzerklärung
+Aufsätze
+Poetik
+Literaturepochen
+Grammatik
+Hilfreiches
+Glossare
+Inhaltsverzeichnis 
+"""

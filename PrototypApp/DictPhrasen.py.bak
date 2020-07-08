@@ -1,0 +1,22 @@
+de = "Nada aiNda"
+pt = "NoNe yet"
+en = "Nichts Noch"
+
+de = input('Digite a frase' + '  ')
+pt = input('Digite o significado em português \n\
+Ou tecle Enter para pular este campo ' + '  ')
+en = input('Digite o significado em inglês \n\
+Ou tecle enter' + ' ')
+
+def dicgio(de):
+    if de != "Nada aiNda":
+        Prov_de = []
+        Prov_de = Prov_de.append(de)
+    return Prov_de
+
+dicgio(de)
+
+MeinW = {
+    'Besonders bei': 'Besonders bei Verben',
+    'Besonders bei': 'Especialmente no caso de'
+    }
