@@ -32,7 +32,6 @@
         <File filename="C:\Users\Giova\_Multifokale\Struktur+i\Referenz+ii\PromesadeEnsinarXadrez\ScriptLab-Tetromino1JS7" />
         <File filename="C:\Users\Giova\AppData\Local\Programs\Python\Python38\Text_Test.py" />
         <File filename="C:\Users\Giova\AppData\Local\Programs\Python\Python38\consortalign.py" />
-        <File filename="C:\Users\Giova\_Multifokale\Struktur+i\Referenz+ii\VoltandoaWebMDN&#xD83D;&#xDC67;.htm" />
         <File filename="C:\Users\Giova\Desktop\colours.css" />
         <File filename="C:\Users\Giova\Algor\GioDBLserver\Metriken\Text Akkumuliert\Funktion_gliedern.py" />
         <File filename="C:\Users\Giova\AppData\Local\Programs\Python\Python38\Tools\scripts\diff.py" />
@@ -80,17 +79,17 @@
         <GUIConfig name="multiInst" setting="0" />
         <GUIConfig name="MISC" fileSwitcherWithoutExtColumn="no" backSlashIsEscapeCharacterForSql="no" monospacedFontFindDlg="yes" stopFillingFindField="no" newStyleSaveDlg="yes" isFolderDroppedOpenFiles="no" docPeekOnTab="no" docPeekOnMap="no" />
         <GUIConfig name="searchEngine" searchEngineChoice="1" searchEngineCustom="" />
-        <GUIConfig name="SmartHighLight" matchCase="yes" wholeWordOnly="no" useFindSettings="no" onAnotherView="yes">yes</GUIConfig>
+        <GUIConfig name="SmartHighLight" matchCase="no" wholeWordOnly="no" useFindSettings="yes" onAnotherView="yes">yes</GUIConfig>
         <GUIConfig name="ScintillaPrimaryView" lineNumberMargin="show" bookMarkMargin="show" indentGuideLine="show" folderMarkStyle="simple" lineWrapMethod="indent" currentLineHilitingShow="show" scrollBeyondLastLine="yes" disableAdvancedScrolling="no" wrapSymbolShow="hide" Wrap="yes" borderEdge="no" isEdgeBgMode="no" edgeMultiColumnPos="36 72 " zoom="6" zoom2="0" whiteSpaceShow="show" eolShow="hide" borderWidth="0" smoothFont="no" />
         <GUIConfig name="DockingManager" leftWidth="328" rightWidth="353" topHeight="200" bottomHeight="392">
             <PluginDlg pluginName="Notepad++::InternalFunction" id="44085" curr="0" prev="-1" isVisible="yes" />
             <PluginDlg pluginName="Notepad++::InternalFunction" id="44081" curr="0" prev="-1" isVisible="yes" />
+            <PluginDlg pluginName="Notepad++::InternalFunction" id="44070" curr="0" prev="-1" isVisible="yes" />
             <PluginDlg pluginName="Notepad++::InternalFunction" id="0" curr="3" prev="-1" isVisible="yes" />
             <PluginDlg pluginName="Notepad++::InternalFunction" id="44084" curr="1" prev="-1" isVisible="no" />
             <PluginDlg pluginName="Notepad++::InternalFunction" id="42052" curr="1" prev="-1" isVisible="no" />
-            <PluginDlg pluginName="Notepad++::InternalFunction" id="44070" curr="0" prev="-1" isVisible="no" />
             <PluginDlg pluginName="Notepad++::InternalFunction" id="44080" curr="1" prev="-1" isVisible="no" />
-            <ActiveTabs cont="0" activeTab="0" />
+            <ActiveTabs cont="0" activeTab="2" />
             <ActiveTabs cont="1" activeTab="-1" />
             <ActiveTabs cont="2" activeTab="-1" />
             <ActiveTabs cont="3" activeTab="-1" />
@@ -101,7 +100,7 @@
         <ProjectPanel id="1" workSpaceFile="" />
         <ProjectPanel id="2" workSpaceFile="" />
     </ProjectPanels>
-    <FileBrowser latestSelectedItem="C:\Users\Giova\Documents\GitHub\css-examples\flexbox\index.html">
+    <FileBrowser latestSelectedItem="C:\Users\Giova\Algor\GioDBLserver\Metriken">
         <root foldername="C:\Users\Giova\Documents\GitHub" />
         <root foldername="C:\Users\Giova\_Multifokale" />
         <root foldername="C:\Users\Giova\Algor\GioDBLserver\de-DE(Confi&#x00E1;veis)" />
