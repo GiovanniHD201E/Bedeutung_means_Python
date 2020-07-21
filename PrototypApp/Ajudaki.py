@@ -1,6 +1,5 @@
 # Test prototype of assistance for hyperactive persons.
 
-
 Wörterbuch = {}
 Liste = []
 Menge = set()
