@@ -1,19 +1,4 @@
-# Multifokus Deutsch, Português-Brasileiro, English
-
-de-gio Multifokus ist ein Raum zu ausprobieren Ideen aus der Kasten
-pt-br Multifokus é um espaço para experimentar ideias fora da caixa
-en-gio Multifokus is a space for testing different ideas out-of-box
-
-
-
-## Referenzen
-
-### Linguistische Referenzen sind:
-
-Deutsch: Langenscheidt Großwörterbuch Deutsch als Fremdsprache (2015)
-         Oxford German (2008)
-
-Português: Eu mesmo
+# Multifokus Deutsch, Português-Brasileiro, English!
 
 English: Oxford German (2008) It is indeed German-English-German.
          Longman 1994 - only English
