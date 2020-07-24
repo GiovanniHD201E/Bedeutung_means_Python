@@ -1,10 +1,32 @@
-# Multifokus
+# Multifokus Deutsch, Português-Brasileiro, English
 
-Multifokus ist ein Raum zu ausprobieren Ideen aus der Kasten 
+de-gio Multifokus ist ein Raum zu ausprobieren Ideen aus der Kasten
+pt-br Multifokus é um espaço para experimentar ideias fora da caixa
+en-gio Multifokus is a space for testing different ideas out-of-box
+
+
 
 ## Referenzen
 
-Referenzen sind MDN Lernbereich, Python Dokumenten in Deutsch
+### Linguistische Referenzen sind:
+
+Deutsch: Langenscheidt Großwörterbuch Deutsch als Fremdsprache (2015)
+         Oxford German (2008)
+
+Português: Eu mesmo
+
+English: Oxford German (2008) It is indeed German-English-German.
+         Longman 1994 - only English
+
+### Kode or Code Referenzen
+
+Deutsch: vor allen MDN Lernbereich und Das Python (3.3.7) Tutorial auf Deutsch, aber auch:
+MDN für Entwickler, CSCircles, 
+
+English:
+
+
+
 
 ### Aufgaben
 
