@@ -1,16 +1,58 @@
-# Multifokus Deutsch, Português-Brasileiro, English!
+# Multifokus
+## Deutsch, Português-Brasileiro, English
+## Python, JavaSkript
+## Hyperaktivitätsstörung, ADHS, TDAH, H-DAD
+## How to cope IQ with great Variance: alfie and clever in one package 
+## Emulation and Reprodutibility of Personal Erlebnis under Hiperactive Disorder
+## Multiplication of personal creation without continuity
+## Class Multifokus: 
+###   def __init__(self, new_idea, implementationdate=[heute]):
+        
+        self.next = new_idea
+        self.present_task = implementationdate
+        
+### x = Multifokus("After finish this", Montag, 4, August 2020)
+
+    print(x.next)
+    print(x.present_task)
+    
+
+present_task = ("line20: Escrever um ensaio sobre acessibilidade e inclusao com \n "
+                "o seguinte título \n "+ randomchoice[Titel])
+                
+new_idea = "lines 2 to 18"
+Titel = [
+"Deficiência e diversidade funcional: Demostenes: o grande orador gago",
+"E se meu teclado manco pudesse voltar a ser útil",
+"Ele é surdo e mudo, porém o espírito de microsoftes lhe deu o dom das línguas",
+"Já o outro nao tem defeitos, sabe bem o português (sem dom multilinguístico)",
+"Quando a eplepsia é motivo de orgulho, a history of great captains of ancient times"
+]
+
+ 
+
+    
+
+
+## The ideas generator entity: attributes, side-effects, result, resolution
+## You is better than you are more or he is best without zu viele Ideen
+## How can I publish my bright ideas if I have other new irresistible idea while...
+
+  
+
 
 English: Oxford German (2008) It is indeed German-English-German.
          Longman 1994 - only English
 
 ### Kode or Code Referenzen
 
+O que sente o meu teclado manco?: Um ensaio sobre acessibilidade e inclusao
+
+
 Deutsch: vor allen MDN Lernbereich und Das Python (3.3.7) Tutorial auf Deutsch, aber auch:
 MDN für Entwickler, CSCircles, 
 
 English:
-
-
 
 
 ### Aufgaben
