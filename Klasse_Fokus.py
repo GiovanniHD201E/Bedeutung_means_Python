@@ -1,4 +1,7 @@
-# Attention is freely modeled by a so clammed Smart Hiperaktiv. 
+# Attention is freely modeled by a so clammed Creativ Hiperaktiv.
+# In the next visit fix the error 16. Aug. 2020
+
+
 
 import random
 
@@ -25,7 +28,7 @@ class Fokus:
 
     erros = ['palavra', 'errada', 'tipo', 'erro', 'ortografia']
     
-class palavra(self, erros):#Como usar esta funcao
+class palavra(self, erros):  #Como usar esta funcao
     self.erro = "elada"
     self.tipo = erros[-1]
 
