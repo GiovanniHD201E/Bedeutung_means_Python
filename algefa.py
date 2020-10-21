@@ -1,6 +1,17 @@
 # Faz perguntas sobre a família e tira conclusoes
-def avos():
-    F = ["Qual o seu nome?", "Qual a sua idade?", "Qual o nome da sua mãe?",
+
+def iniciar():
+    nome = input("Qual o seu nome?\n  ")
+    print(saud(nome))
+    print(avos(nome))
+    
+
+def saud(seu_nome, bom = "Bom dia", /):
+    return f"{bom}, {seu_nome}"
+
+
+def avos(seu_nome):
+    F = ["Qual o seu nome?",  "Qual a sua idade?", "Qual o nome da sua mãe?",
          "Qual nome da mãe da sua mãe?", "Qual o nome da sua filha?",
          "Qual o nome do seu pai?", "Qual o nome da mãe do seu pai?"]
     T = ("seu nome", "sua idade", "sua mãe", "avó materna", "sua filha",
@@ -15,5 +26,5 @@ def avos():
     return W
                 
 if __name__ == '__main__':
-    print(avos())
-
+    #print(avos())
+    print(iniciar())
