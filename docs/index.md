@@ -1,31 +1,27 @@
-## Olá! Hallo! Hello! 
+# Olá! Hallo! Hello! 
 
-### Parâmetros de comunicabilidade, expressividade, usw. 
+## Parâmetros de comunicabilidade, expressividade, usw
 
 Escrevo aqui sob os seguintes parâmetros:
 
 - o texto deve ser excelentemente escrito se em português (do Brasil).
 - if German or English is used, I beg your tolerance about my errors.
 
-### Why Portuguese?
+## Why Portuguese?
 
 Clear ideas in this page are only assured if text is in Portuguese.
 
-### Why German? 
+## Why German? 
 
 Love, simple so! With "esmero" and careful, 'auch wenn' with unavoidable 
 errors.
 
-### English was loved...
+## English was loved...
 
 Now it is used just for convenience and pragmatics concerns, without 
 careful nor revision. I did not love it anymore, nevertheless I need it.
 
-
-
-
-
-You can use the [editor on GitHub](https://github.com/GiovanniHD201E/Multifokus/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+I, and oly I, is supposed to have rights of edition here. The link is: [editor on GitHub](https://github.com/GiovanniHD201E/Multifokus/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
