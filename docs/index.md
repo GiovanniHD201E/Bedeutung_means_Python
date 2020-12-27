@@ -1,15 +1,20 @@
-# Olá! Hallo! Hello! 
+# Multifokus in drei Sprachen
 
-## Parâmetros de comunicabilidade, expressividade, usw
+## Diretrizes com Esperanças
 
-Escrevo aqui sob os seguintes parâmetros:
-
-- o texto deve ser excelentemente escrito se em português (do Brasil).
+- o texto deve ser bem escrito, se em português (do Brasil).
+- O texto provavelmente contém erros, se em alemão ou inglês
 - if German or English is used, I beg your tolerance about my errors.
 
 ## Why Portuguese?
 
-Clear ideas in this page are only assured if text is in Portuguese.
+Embora eu seja hiperativo e saiba que o erro é inevitável, 
+há momentos que quero minimizá-lo. Ainda que eu prefira 
+me expressar em alemão para treinar-me na escrita, o português 
+é a lingua em que minhas ideias são melhor desenvolvidas.
+Mas a meta deste projeto é transportar minhas habilidades 
+para o alemão, com excessão da fala: Ler, Escrever, Ouvir, 
+Entender, Explicar, Esclarecer.
 
 ## Why German? 
 
