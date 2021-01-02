@@ -1,4 +1,29 @@
-# Olá! Hallo! Hello! 
+# Multifokus ADHS Python Deutsch Wissenschaft Liebe Grundlagen 
+
+Aufmerksamkeitsdefizit- und Hyperaktivitätsstörung
+
+Meine erste kreative Gedanken in deutsch ohne mein Mutter-Sprache
+beeinflüssen: Gio[1] = """\
+Adjektiv ist ein Substantiv; auch Adjektive ist ein Substantiv, doch Adjetiven aber nicht Substantive sind."""
+
+  
+
+Olá! Hallo! Hello! 
+
+### Alphabet Ordnungszahl im Python
+__str.isalpha()__
+
+
+Return true if all characters in the string are al-
+phabetic and there is at least one character, fal- 
+se other otherwise. Alphabetic  characters are those characters defined in the 
+Unicode charac- ter database as "Letter", i.e., those withgeneral category 
+property being one of "Lm", "Lt", "Lu", "Ll", or "Lo".  Note that this is different 
+from the "Alphabetic" property defined in the Unicode Standard. east one 
+character, fal- se other otherwise. Alphabetic  characters a haracters are 
+those characte
+
+
 
 ## Parâmetros de comunicabilidade, expressividade, usw
 
@@ -56,3 +81,5 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+̃̃
