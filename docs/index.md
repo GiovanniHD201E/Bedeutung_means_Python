@@ -3,8 +3,8 @@
 Aufmerksamkeitsdefizit- und Hyperaktivitätsstörung
 
 Meine erste kreative Gedanken in deutsch ohne mein Mutter-Sprache
-beeinflüssen: Gio[1] = """\
-Adjektiv ist ein Substantiv; auch Adjektive ist ein Substantiv, doch Adjetiven aber nicht Substantive sind."""
+beeinflüssen: Gio[1] = 
+Adjektiv ist ein Substantiv; auch Adjektive ist ein Substantiv, doch Adjetiven aber nicht Substantive sind.
 
   
 
