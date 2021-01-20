@@ -1,4 +1,5 @@
 # A demonstration of multifokus in action. 17:00
+# 2021 Januar 05: Siehe Feedbackhub2.py für ein Modellierung von hier.
 
 import madonna # Eufemism: I just had wanted sound, just sound
 import time    # I downloaded sound-driver at an hour half ago
@@ -20,7 +21,7 @@ Resolut = ("16:40 - From today on, I will overcome the mark of 90% \n"
 Again   = ("I began to write here on that subject. So I wrote these lines \n")
 
 The_lesson = ("It is the way I always return to the principal. Deviation \n "
-              "is unavoidable, but the return to Projekt Multifokus so does)
+              "is unavoidable, but the return to Projekt Multifokus so does")
 
 
 

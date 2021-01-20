@@ -1,4 +1,4 @@
-# Multifokus ADHS Python Deutsch Wissenschaft Liebe Grundlagen 
+# PNGF - python na gestao de fotos e informacoes de favoritos Firefox 
 
 Aufmerksamkeitsdefizit- und Hyperaktivitätsstörung
 
