@@ -2,6 +2,8 @@
 
 Aufmerksamkeitsdefizit- und Hyperaktivitätsstörung
 
+Σελφ reference aus auf Kasten
+
 Meine erste kreative Gedanken in deutsch ohne mein Mutter-Sprache
 beeinflüssen: Gio[1] = 
 Adjektiv ist ein Substantiv; auch Adjektive ist ein Substantiv, doch Adjetiven aber nicht Substantive sind.
