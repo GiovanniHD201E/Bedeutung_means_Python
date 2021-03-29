@@ -1,6 +1,12 @@
-# Multifokus 
+# Multifokus Hiperatividade e Desatentitude 
 
-## GitHub 
+## GitHub
+
+
+
+Ufa! Consegui realizar a mudanca que desejei. Eu escrevo bem em português, mas o meu teclado nao tem acesso fácil ao cedilha e o til, por que tenho obsessäo pela língua alemäa. Ademais sou motoramente atrapalhado. 
+
+Eu sou hiperativo, apaixonado pelo conhecimento lógico. Mas sou fraco de um lado da cabeca, embora o outro seja forte. Um QI de 109 pontos, nem sempre é normal. Fui avaliado em várias aptidoes no Hospital de Clínicas de Porto Alegre, durante 8 sessoes, totalizando 6 horas. Ou 12, nao tenho certeza do tempo de cada sessao. Os resultados das aptidoes, registradas, mas perdidas, (idos de 1998), lembro-me mais que vagamente. Foram os valores. Dois abaixo de 90: a fraqueza, ou a burrice, como me acostumei a ouvir. Alguns valores próximos de 100. Um fechou na casa dos 130. E uma retumbante "Capacidade de Antecipacao Temporal" bateu nos 170. Taí, respondida uma das maiores dúvidas da minha vida! Sou burro ou inteligente? Resposta: "És burro e inteligente" Mas somando com a hiperatividade, a grosseria, o desespero, e a obsessao por continuar lendo ao invés de praticar o que li, e também a descontinuidade de foco, que troca a tarefa iniciada ontem pela nova ideia de hoje, fico no grupo dos inadimplentes. O meu maior sonho é vencer a tentacao de dar mais um drible e fazer o gol. Eu refiz disciplinas na faculdade mesmo depois de estar aprovado para aprender melhor o assunto. Houve mesmo uma vez em que fui aprovado no inglês 3 e me matriculei novamente no inglês 2. Pelo menos a minha professora, oriunda da Polônia, me elogiou efusivamente: "Sábia decisao, Giovanni!"
 
 Github hat meine unbeachtet Intuitivity gewonnen. Deswegen, habe ich heute festgelegt: Lesen bis gewissen erhalten.
 
