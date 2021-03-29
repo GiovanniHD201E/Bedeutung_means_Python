@@ -1,30 +1,21 @@
-# Multifokus in drei Sprachen
+# Multifokus 
 
-## Diretrizes com Esperanças
+## GitHub 
 
-- o texto deve ser bem escrito, se em português (do Brasil).
-- O texto provavelmente contém erros, se em alemão ou inglês
-- if German or English is used, I beg your tolerance about my errors.
+Github hat meine unbeachtet Intuitivity gewonnen. Deswegen, habe ich heute festgelegt: Lesen bis gewissen erhalten.
 
-## Why Portuguese?
+## Learning, Known, Just in GitHub
 
-Embora eu seja hiperativo e saiba que o erro é inevitável, 
-há momentos que quero minimizá-lo. Ainda que eu prefira 
-me expressar em alemão para treinar-me na escrita, o português 
-é a lingua em que minhas ideias são melhor desenvolvidas.
-Mas a meta deste projeto é transportar minhas habilidades 
-para o alemão, com excessão da fala: Ler, Escrever, Ouvir, 
-Entender, Explicar, Esclarecer.
+Deutsch, Portugiesisch, Englisch
+Alemao, Português, Inglês
+German, Portuguese, English
 
-## Why German? 
+Python, hyperfokussiert dankenschön
 
-Love, simple so! With "esmero" and careful, 'auch wenn' with unavoidable 
-errors.
+## GitHub: meine Intuitivität keine Hilfe hier, sofort...
 
-## English was loved...
+I will begin read die Dokumentation
 
-Now it is used just for convenience and pragmatics concerns, without 
-careful nor revision. I did not love it anymore, nevertheless I need it.
 
 I, and oly I, is supposed to have rights of edition here. The link is: [editor on GitHub](https://github.com/GiovanniHD201E/Multifokus/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
 

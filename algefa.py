@@ -1,5 +1,11 @@
-# Faz perguntas sobre a família e tira conclusoes
+# Make questions about relatives and presents a summary
+""" Das Ziel: durch Induktive Rationale entscheiden Relationen
+zwischen zwei beliebgen Namen enthalten in Antworten.
+Sei zwei Antworten A1, A2 = P1.Name1, P2.Name2
 
+
+
+"""
 def iniciar():
     nome = input("Qual o seu nome?\n  ")
     print(saud(nome))
